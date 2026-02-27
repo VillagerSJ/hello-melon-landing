@@ -7,15 +7,15 @@ const FRAME_SOURCES = [
   "/assets/mascot-pip-frame1.png",
   "/assets/mascot-pip-frame2.png",
   "/assets/mascot-pip-frame3.png",
+  "/assets/mascot-pip-frame4.png",
   "/assets/mascot-pip-frame5.png",
   "/assets/mascot-pip-frame6.png",
   "/assets/mascot-pip-frame7.png",
   "/assets/mascot-pip-frame8.png",
-  "/assets/mascot-pip-frame9.png",
-  "/assets/mascot-pip-frame8.png",
   "/assets/mascot-pip-frame7.png",
   "/assets/mascot-pip-frame6.png",
   "/assets/mascot-pip-frame5.png",
+  "/assets/mascot-pip-frame4.png",
   "/assets/mascot-pip-frame3.png",
   "/assets/mascot-pip-frame2.png"
 ];

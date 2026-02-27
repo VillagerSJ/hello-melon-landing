@@ -1,17 +1,64 @@
 import type { Metadata } from "next";
-import { Dosis, Solway } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-const dosis = Dosis({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-dosis"
+const dosis = localFont({
+  src: [
+    {
+      path: "../public/fonts/dosis/Dosis-Regular.otf",
+      weight: "400",
+      style: "normal"
+    },
+    {
+      path: "../public/fonts/dosis/Dosis-Medium.otf",
+      weight: "500",
+      style: "normal"
+    },
+    {
+      path: "../public/fonts/dosis/Dosis-SemiBold.otf",
+      weight: "600",
+      style: "normal"
+    },
+    {
+      path: "../public/fonts/dosis/Dosis-Bold.otf",
+      weight: "700",
+      style: "normal"
+    }
+  ],
+  variable: "--font-dosis",
+  display: "swap"
 });
 
-const solway = Solway({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "700", "800"],
-  variable: "--font-solway"
+const solway = localFont({
+  src: [
+    {
+      path: "../public/fonts/solway/Solway-Light.ttf",
+      weight: "300",
+      style: "normal"
+    },
+    {
+      path: "../public/fonts/solway/Solway-Regular.ttf",
+      weight: "400",
+      style: "normal"
+    },
+    {
+      path: "../public/fonts/solway/Solway-Medium.ttf",
+      weight: "500",
+      style: "normal"
+    },
+    {
+      path: "../public/fonts/solway/Solway-Bold.ttf",
+      weight: "700",
+      style: "normal"
+    },
+    {
+      path: "../public/fonts/solway/Solway-ExtraBold.ttf",
+      weight: "800",
+      style: "normal"
+    }
+  ],
+  variable: "--font-solway",
+  display: "swap"
 });
 
 export const metadata: Metadata = {

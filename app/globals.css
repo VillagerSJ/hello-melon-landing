@@ -13,9 +13,10 @@ body {
 .melon-ribbon {
   position: relative;
   display: flex;
-  width: clamp(320px, 50vw, 1080px);
+  width: clamp(320px, 37vw, 920px);
   max-width: calc(100vw - 84px);
-  min-height: 54px;
+  height: 64px;
+  min-height: 64px;
   box-sizing: border-box;
   justify-content: center;
   align-items: center;
@@ -37,12 +38,12 @@ body {
 
 .melon-ribbon::before {
   left: -24px;
-  clip-path: polygon(100% 0, 0 0, 24% 50%, 0 100%, 100% 100%);
+  clip-path: polygon(100% 0, 0 0, 50% 50%, 0 100%, 100% 100%);
 }
 
 .melon-ribbon::after {
   right: -24px;
-  clip-path: polygon(0 0, 100% 0, 76% 50%, 100% 100%, 0 100%);
+  clip-path: polygon(0 0, 100% 0, 50% 50%, 100% 100%, 0 100%);
 }
 
 @media (max-width: 1023px) {
@@ -100,15 +101,30 @@ body {
   will-change: transform;
 }
 
+.hero-hanging-cta-button {
+  border: 0;
+  outline: none;
+  box-shadow: none;
+  background: transparent;
+  appearance: none;
+}
+
+.hero-hanging-cta-button:focus,
+.hero-hanging-cta-button:focus-visible {
+  border: 0;
+  outline: none;
+  box-shadow: none;
+}
+
 @media (hover: hover) and (pointer: fine) {
-  .hero-hanging-cta:hover,
-  .hero-hanging-cta:focus-visible {
+  .hero-hanging-cta-button:hover .hero-hanging-cta,
+  .hero-hanging-cta-button:focus-visible .hero-hanging-cta {
     transform: translateY(8px) rotate(7deg);
     filter: drop-shadow(0 7px 10px rgba(0, 0, 0, 0.2));
   }
 }
 
-.hero-hanging-cta:active {
+.hero-hanging-cta-button:active .hero-hanging-cta {
   transform: translateY(10px) rotate(8deg);
 }
 
@@ -117,9 +133,9 @@ body {
     transition: none;
   }
 
-  .hero-hanging-cta:hover,
-  .hero-hanging-cta:focus-visible,
-  .hero-hanging-cta:active {
+  .hero-hanging-cta-button:hover .hero-hanging-cta,
+  .hero-hanging-cta-button:focus-visible .hero-hanging-cta,
+  .hero-hanging-cta-button:active .hero-hanging-cta {
     transform: none;
     filter: none;
   }
