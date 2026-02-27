@@ -13,8 +13,7 @@ body {
 .melon-ribbon {
   position: relative;
   display: flex;
-  width: clamp(320px, 37vw, 920px);
-  max-width: calc(100vw - 84px);
+  width: fit-content;
   height: 64px;
   min-height: 64px;
   box-sizing: border-box;
@@ -48,9 +47,7 @@ body {
 
 @media (max-width: 1023px) {
   .melon-ribbon {
-    width: min(88vw, 760px);
-    max-width: calc(100vw - 56px);
-    min-height: 46px;
+    width: fit-content;
     padding: 11px 22px;
   }
 
