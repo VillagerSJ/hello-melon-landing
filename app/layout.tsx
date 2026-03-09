@@ -73,7 +73,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dosis.variable} ${solway.variable} bg-[#efe4cc] antialiased`}>
+      <body
+        suppressHydrationWarning
+        className={`${dosis.variable} ${solway.variable} bg-[#efe4cc] antialiased`}
+      >
         {children}
       </body>
     </html>

@@ -1,35 +1,55 @@
+"use client";
+
 import Image from "next/image";
+import { useCallback } from "react";
 import PipMascotAnimation from "@/components/PipMascotAnimation";
 import HeroCtaButton from "./HeroCtaButton";
 import { HOME_COPY } from "./content";
 
 export default function DesktopLandingSection() {
+  const handleHeroMouseMove = useCallback((event: React.MouseEvent<HTMLElement>) => {
+    const target = event.currentTarget;
+    const rect = target.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    target.style.setProperty("--hero-mx", `${x}px`);
+    target.style.setProperty("--hero-my", `${y}px`);
+  }, []);
+
   return (
     <section className="hidden md:block">
-      <header className="relative z-20 bg-[#CE6166] px-4 pb-10 pt-3 text-center text-[#fff3dd] sm:px-6 sm:pb-11 sm:pt-4 md:pb-12">
-        <p className="font-solway text-[22px] font-bold leading-[27px]">
-          {HOME_COPY.welcomeTitle}
-        </p>
-        <p className="font-solway mt-[2px] text-[22px] font-normal leading-[27px]">
-          {HOME_COPY.welcomeSubtitle}
-        </p>
-
-        <div className="pointer-events-none absolute left-1/2 top-full z-30 w-full -translate-x-1/2 -translate-y-1/2 px-4 sm:px-6">
-          <p className="melon-ribbon mx-auto font-dosis text-[22px] font-semibold leading-[24px] text-[#413A29]">
-            {HOME_COPY.ribbonText}
+      <header className="fixed inset-x-0 top-0 z-50">
+        <div className="relative bg-[#CE6166] px-4 pb-10 pt-3 text-center text-[#fff3dd] sm:px-6 sm:pb-11 sm:pt-4 md:pb-12">
+          <p className="font-solway text-[22px] font-bold leading-[27px]">
+            {HOME_COPY.welcomeTitle}
           </p>
+          <p className="font-solway mt-[2px] text-[22px] font-normal leading-[27px]">
+            {HOME_COPY.welcomeSubtitle}
+          </p>
+
+          <div className="pointer-events-none absolute left-1/2 top-full z-30 w-full -translate-x-1/2 -translate-y-1/2 px-4 sm:px-6">
+            <p className="melon-ribbon mx-auto font-dosis text-[22px] font-semibold leading-[24px] text-[#413A29]">
+              {HOME_COPY.ribbonText}
+            </p>
+          </div>
         </div>
       </header>
+      <div aria-hidden className="h-[108px] lg:h-[122px]" />
 
-      <section className="relative min-h-[560px] pt-8 sm:min-h-[620px] sm:pt-10 md:min-h-[700px] md:pt-14 lg:min-h-[840px] lg:pt-[122px]">
+      <section
+        className="hero-illusion relative min-h-[560px] pt-8 sm:min-h-[620px] sm:pt-10 md:min-h-[700px] md:pt-14 lg:min-h-[840px] lg:pt-[122px]"
+        onMouseMove={handleHeroMouseMove}
+      >
         <div className="absolute inset-0">
           <Image
             src="/assets/hero-bg.png"
             alt=""
             fill
             priority
-            className="object-fill object-center"
+            className="hero-illusion-bg object-fill object-center"
           />
+          <div className="hero-illusion-glow absolute inset-0" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#efe4cc]/86 via-[#efe4cc]/57 to-transparent" />
           <div className="absolute inset-0 bg-[#efe4cc]/8" />
         </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const FRAME_SOURCES = [
   "/assets/mascot-pip-frame1.png",
@@ -19,25 +19,36 @@ const FRAME_SOURCES = [
   "/assets/mascot-pip-frame3.png",
   "/assets/mascot-pip-frame2.png"
 ];
+const UNIQUE_FRAME_SOURCES = [...new Set(FRAME_SOURCES)];
+const TOTAL_FRAME_COUNT = UNIQUE_FRAME_SOURCES.length;
+const PRELOAD_TIMEOUT_MS = 1200;
 
 type PipMascotAnimationProps = {
   alt?: string;
   className?: string;
   frameDurationMs?: number;
+  respectReducedMotion?: boolean;
 };
 
 export default function PipMascotAnimation({
   alt = "Pip mascot",
   className = "",
-  frameDurationMs = 100
+  frameDurationMs = 100,
+  respectReducedMotion = false
 }: PipMascotAnimationProps) {
   const [frameIndex, setFrameIndex] = useState(0);
-  const [reducedMotion, setReducedMotion] = useState(false);
+  const [reducedMotionEnabled, setReducedMotionEnabled] = useState(false);
+  const [isPreloaded, setIsPreloaded] = useState(false);
+  const hasStartedPreloadRef = useRef(false);
 
   useEffect(() => {
+    if (!respectReducedMotion) {
+      return;
+    }
+
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     const updateMotionPreference = () => {
-      setReducedMotion(mediaQuery.matches);
+      setReducedMotionEnabled(mediaQuery.matches);
     };
 
     updateMotionPreference();
@@ -46,10 +57,51 @@ export default function PipMascotAnimation({
     return () => {
       mediaQuery.removeEventListener("change", updateMotionPreference);
     };
-  }, []);
+  }, [respectReducedMotion]);
 
   useEffect(() => {
-    if (reducedMotion) {
+    if (hasStartedPreloadRef.current) {
+      return;
+    }
+
+    hasStartedPreloadRef.current = true;
+
+    let cancelled = false;
+    const loadedInThisRun = new Set<string>();
+
+    const markFrameReady = (frameSrc: string) => {
+      if (cancelled || loadedInThisRun.has(frameSrc)) {
+        return;
+      }
+      loadedInThisRun.add(frameSrc);
+      if (loadedInThisRun.size >= TOTAL_FRAME_COUNT) {
+        setIsPreloaded(true);
+      }
+    };
+
+    const preloadTimeoutId = window.setTimeout(() => {
+      if (!cancelled) {
+        setIsPreloaded(true);
+      }
+    }, PRELOAD_TIMEOUT_MS);
+
+    UNIQUE_FRAME_SOURCES.forEach((frameSrc) => {
+      const image = new window.Image();
+      image.onload = () => markFrameReady(frameSrc);
+      image.onerror = () => markFrameReady(frameSrc);
+      image.src = frameSrc;
+    });
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(preloadTimeoutId);
+    };
+  }, []);
+
+  const shouldAnimate = isPreloaded && !(respectReducedMotion && reducedMotionEnabled);
+
+  useEffect(() => {
+    if (!shouldAnimate) {
       return;
     }
 
@@ -60,11 +112,9 @@ export default function PipMascotAnimation({
     return () => {
       window.clearInterval(intervalId);
     };
-  }, [frameDurationMs, reducedMotion]);
+  }, [frameDurationMs, shouldAnimate]);
 
-  const src = reducedMotion
-    ? "/assets/mascot-pip.png"
-    : FRAME_SOURCES[frameIndex];
+  const src = shouldAnimate ? FRAME_SOURCES[frameIndex] : "/assets/mascot-pip.png";
 
   return (
     <Image
@@ -73,6 +123,7 @@ export default function PipMascotAnimation({
       width={650}
       height={667}
       priority
+      unoptimized
       className={className}
     />
   );

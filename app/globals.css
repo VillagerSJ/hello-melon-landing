@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@config "../tailwind.config.js";
+@import "tailwindcss";
 
 :root {
   color-scheme: light;
@@ -8,6 +7,56 @@
 
 body {
   margin: 0;
+}
+
+.hero-illusion {
+  --hero-mx: 50%;
+  --hero-my: 50%;
+}
+
+.hero-illusion-bg {
+  transition:
+    opacity 280ms ease,
+    transform 320ms ease;
+}
+
+.hero-illusion-glow {
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 280ms ease;
+  background: radial-gradient(
+    420px circle at var(--hero-mx) var(--hero-my),
+    rgba(255, 243, 221, 0.34) 0%,
+    rgba(255, 243, 221, 0.16) 42%,
+    rgba(255, 243, 221, 0) 74%
+  );
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hero-illusion:hover .hero-illusion-bg {
+    opacity: 0.86;
+    transform: scale(1.01);
+  }
+
+  .hero-illusion:hover .hero-illusion-glow {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-illusion-bg,
+  .hero-illusion-glow {
+    transition: none;
+  }
+
+  .hero-illusion:hover .hero-illusion-bg {
+    opacity: 1;
+    transform: none;
+  }
+
+  .hero-illusion:hover .hero-illusion-glow {
+    opacity: 0;
+  }
 }
 
 .melon-ribbon {

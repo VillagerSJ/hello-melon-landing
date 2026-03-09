@@ -6,14 +6,27 @@ import { HOME_COPY } from "./content";
 export default function MobileLandingSection() {
   return (
     <section className="mx-auto w-full overflow-hidden bg-[#efe4cc] md:hidden">
-      <header className="bg-[#CE6166] px-[clamp(14px,4.6vw,20px)] pb-[clamp(16px,4vw,22px)] pt-[clamp(12px,3.6vw,18px)] text-center text-[#fff3dd]">
+      <header className="fixed inset-x-0 top-0 z-50">
+        <div className="relative bg-[#CE6166] px-[clamp(14px,4.6vw,20px)] pb-[clamp(16px,4vw,22px)] pt-[clamp(12px,3.6vw,18px)] text-center text-[#fff3dd]">
+          <p className="font-solway text-[clamp(17px,5.2vw,21px)] font-bold leading-[1.2]">
+            {HOME_COPY.welcomeTitle}
+          </p>
+          <p className="font-solway mt-[2px] text-[clamp(16px,4.8vw,20px)] font-normal leading-[1.2]">
+            {HOME_COPY.welcomeSubtitle}
+          </p>
+        </div>
+      </header>
+      <div
+        aria-hidden
+        className="pointer-events-none invisible bg-[#CE6166] px-[clamp(14px,4.6vw,20px)] pb-[clamp(16px,4vw,22px)] pt-[clamp(12px,3.6vw,18px)] text-center"
+      >
         <p className="font-solway text-[clamp(17px,5.2vw,21px)] font-bold leading-[1.2]">
           {HOME_COPY.welcomeTitle}
         </p>
         <p className="font-solway mt-[2px] text-[clamp(16px,4.8vw,20px)] font-normal leading-[1.2]">
           {HOME_COPY.welcomeSubtitle}
         </p>
-      </header>
+      </div>
 
       <section className="relative overflow-hidden px-[clamp(12px,4vw,18px)] pb-[clamp(88px,24vw,118px)] pt-[clamp(22px,6.8vw,38px)]">
         <div className="absolute inset-0">
