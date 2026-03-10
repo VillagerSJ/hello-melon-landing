@@ -3,13 +3,13 @@ import { HOME_COPY } from "./content";
 
 export default function ExploreVillageSection() {
   return (
-    <section className="relative bg-[#F9EED9] px-[clamp(12px,4vw,24px)] pb-[clamp(56px,9vw,96px)] pt-[clamp(32px,6.5vw,56px)] md:px-12 lg:px-[110px]">
+    <section className="relative bg-melon-ribbon px-[clamp(12px,4vw,24px)] pb-[clamp(56px,9vw,96px)] pt-[clamp(32px,6.5vw,56px)] md:px-12 lg:px-[110px]">
       <div className="mx-auto w-full max-w-[1760px]">
         <header className="mx-auto max-w-[860px] text-center">
-          <h2 className="font-solway text-[clamp(34px,5.4vw,50px)] font-light leading-[1.08] tracking-[-0.01em] text-[#CE6166]">
+          <h2 className="font-solway text-[clamp(34px,5.4vw,50px)] font-light leading-[1.08] tracking-[-0.01em] text-melon-rose">
             {HOME_COPY.exploreTitle}
           </h2>
-          <p className="mt-[clamp(4px,1.2vw,10px)] font-dosis text-[clamp(18px,3vw,30px)] font-normal leading-[1.3] tracking-[0em] text-[#413A29]">
+          <p className="mt-[clamp(4px,1.2vw,10px)] font-dosis text-[clamp(18px,3vw,30px)] font-normal leading-[1.3] tracking-[0em] text-melon-text">
             {HOME_COPY.exploreSubtitle}
           </p>
         </header>

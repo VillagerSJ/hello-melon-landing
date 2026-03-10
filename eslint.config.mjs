@@ -5,5 +5,14 @@ import nextTypeScript from "eslint-config-next/typescript";
 export default defineConfig([
   ...nextCoreWebVitals,
   ...nextTypeScript,
+  {
+    rules: {
+      "@typescript-eslint/consistent-type-imports": [
+        "error",
+        { prefer: "type-imports" }
+      ],
+      "no-console": ["warn", { allow: ["warn", "error"] }]
+    }
+  },
   globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts"])
 ]);

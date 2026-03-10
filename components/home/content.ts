@@ -1,3 +1,50 @@
+export type WhyDifferentCard = {
+  readonly title: string;
+  readonly iconSrc: string;
+  readonly iconAlt: string;
+};
+
+export type VoiceCard = {
+  readonly id: string;
+  readonly avatarSrc: string;
+  readonly avatarAlt: string;
+  readonly quote: string;
+  readonly ageLabel: string;
+};
+
+export type FooterLink = {
+  readonly label: string;
+  readonly href: string;
+};
+
+export type HomeCopy = {
+  readonly welcomeTitle: string;
+  readonly welcomeSubtitle: string;
+  readonly ribbonText: string;
+  readonly heroLineOne: string;
+  readonly heroLineTwo: string;
+  readonly heroDescription: string;
+  readonly ctaLabel: string;
+  readonly exploreTitle: string;
+  readonly exploreSubtitle: string;
+  readonly whyDifferentTitle: string;
+  readonly whyDifferentSubtitle: string;
+  readonly whyDifferentCards: readonly WhyDifferentCard[];
+  readonly voicesTitle: string;
+  readonly joinWaitlistLabel: string;
+  readonly voicesStripText: string;
+  readonly voicesCards: readonly VoiceCard[];
+  readonly villageStoryTitle: string;
+  readonly villageStoryParagraphs: readonly string[];
+  readonly villageStoryEmphasis: string;
+  readonly earlyAccessTitle: string;
+  readonly earlyAccessBody: string;
+  readonly earlyAccessCtaLabel: string;
+  readonly footerLinks: readonly FooterLink[];
+  readonly footerTagline: string;
+  readonly footerCopyright: string;
+};
+
 export const HOME_COPY = {
   welcomeTitle: "Welcome to Melon Village",
   welcomeSubtitle: "Where healthcare feels like home",
@@ -16,23 +63,23 @@ export const HOME_COPY = {
     {
       title: "Emotion-first design",
       iconSrc: "/assets/HelloMelon_Icon_Emotion1.svg",
-      iconAlt: "Emotion-first design icon"
+      iconAlt: "Emotion-first design icon",
     },
     {
       title: "Gen Z-friendly experience",
       iconSrc: "/assets/HelloMelon_Icon_GenZFriendly.svg",
-      iconAlt: "Gen Z-friendly experience icon"
+      iconAlt: "Gen Z-friendly experience icon",
     },
     {
       title: "No shame, pressure, or jargon",
       iconSrc: "/assets/HelloMelon_Icon_NoShame_Jargon.svg",
-      iconAlt: "No shame, pressure, or jargon icon"
+      iconAlt: "No shame, pressure, or jargon icon",
     },
     {
       title: "Gamified care spaces to make healing feel natural",
       iconSrc: "/assets/HelloMelon_Icon_GamifiedCareSpaces.svg",
-      iconAlt: "Gamified care spaces icon"
-    }
+      iconAlt: "Gamified care spaces icon",
+    },
   ],
   voicesTitle: "Voices of Early Villagers",
   joinWaitlistLabel: "Join Waitlist",
@@ -43,35 +90,35 @@ export const HOME_COPY = {
       avatarSrc: "/assets/avatars/HelloMelon_Illustration_Avatar_P1%201.png",
       avatarAlt: "Early villager avatar 1",
       quote: "Melon made me feel like I mattered...",
-      ageLabel: "Age 24"
+      ageLabel: "Age 24",
     },
     {
       id: "p2",
       avatarSrc: "/assets/avatars/HelloMelon_Illustration_Avatar_P2%201.png",
       avatarAlt: "Early villager avatar 2",
       quote: "Melon made me feel like I mattered...",
-      ageLabel: "Age 24"
+      ageLabel: "Age 24",
     },
     {
       id: "p3",
       avatarSrc: "/assets/avatars/HelloMelon_Illustration_Avatar_P3%201.png",
       avatarAlt: "Early villager avatar 3",
       quote: "Melon made me feel like I mattered...",
-      ageLabel: "Age 24"
+      ageLabel: "Age 24",
     },
     {
       id: "sanje",
       avatarSrc: "/assets/avatars/HelloMelon_Illustration_Avatar_Sanje%201.png",
       avatarAlt: "Early villager avatar 4",
       quote: "Melon made me feel like I mattered...",
-      ageLabel: "Age 24"
-    }
+      ageLabel: "Age 24",
+    },
   ],
   villageStoryTitle: "A Villager’s Story",
   villageStoryParagraphs: [
     "Hi, I’m Sanjé, a fellow villager who also happens to be the one who planted the first seeds.",
     "I’ve spent years in healthcare and tech, but I always felt something was missing. Too much fear, too little warmth. So I started Hello Melon, not as a clinic, but as the kind of place I wished existed for myself, my family, and now for you.",
-    "Hello Melon was born from a simple belief: healthcare should feel like hope."
+    "Hello Melon was born from a simple belief: healthcare should feel like hope.",
   ],
   villageStoryEmphasis: "Not fear. Not pressure. Just care.",
   earlyAccessTitle: "Want Early Access",
@@ -81,25 +128,27 @@ export const HOME_COPY = {
   footerLinks: [
     {
       label: "Privacy",
-      href: "#"
+      href: "#",
     },
     {
       label: "Terms",
-      href: "#"
+      href: "#",
     },
     {
       label: "Instagram",
-      href: "#"
+      href: "#",
     },
     {
       label: "X (Twitter)",
-      href: "#"
+      href: "#",
     },
     {
       label: "LinkedIn",
-      href: "#"
-    }
+      href: "#",
+    },
   ],
   footerTagline: "Made with care",
-  footerCopyright: "© 2025 Melon Health Inc."
-} as const;
+  footerCopyright: "© 2026 Melon Health Inc.",
+} as const satisfies HomeCopy;
+
+export const VOICES_CARDS = HOME_COPY.voicesCards;

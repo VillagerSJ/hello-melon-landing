@@ -22,7 +22,7 @@ export default function HeroCtaButton({
           alt=""
           width={3062}
           height={607}
-          priority
+          loading="lazy"
           className="h-auto w-full"
         />
       </span>

@@ -1,25 +1,24 @@
 # Hello Melon Landing
 
-Next.js App Router + TypeScript + Tailwind scaffold with `Nav + Hero` implemented from wireframe.
+Next.js App Router landing page built with React 19, TypeScript, and Tailwind CSS 4.
 
-## Run
+## Scripts
 
 ```bash
-npm install
 npm run dev
+npm run lint
+npm run typecheck
+npm run build
+npm run check
 ```
 
-## Current Scope
+## Architecture Notes
 
-Implemented:
-- Top ribbon nav/header
-- Hero section (copy, CTA, mascot slot, background slot, bottom wave)
-
-Pending:
-- All sections below hero
+- `app/page.tsx` is statically cacheable (`revalidate = 3600`)
+- Hero is rendered via one responsive component (`components/home/HeroSection.tsx`)
+- Client-side animation logic is isolated in focused hooks under `components/home/hooks`
+- Route-level resiliency states are implemented in `app/loading.tsx` and `app/error.tsx`
 
 ## Assets
 
-Add required hero assets to `public/assets`:
-- `hero-bg.png`
-- `mascot-pip.png`
+Static assets and local fonts live in `public/assets` and `public/fonts`.

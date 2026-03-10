@@ -62,8 +62,27 @@ const solway = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Hello Melon",
-  description: "This isn't a clinic. It's a village."
+  metadataBase: new URL("https://hellomelon.com"),
+  title: {
+    default: "Hello Melon",
+    template: "%s | Hello Melon"
+  },
+  description: "This isn't a clinic. It's a village.",
+  openGraph: {
+    title: "Hello Melon",
+    description: "This isn't a clinic. It's a village.",
+    type: "website",
+    url: "/"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hello Melon",
+    description: "This isn't a clinic. It's a village."
+  },
+  robots: {
+    index: true,
+    follow: true
+  }
 };
 
 export default function RootLayout({
@@ -73,10 +92,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        suppressHydrationWarning
-        className={`${dosis.variable} ${solway.variable} bg-[#efe4cc] antialiased`}
-      >
+      <body className={`${dosis.variable} ${solway.variable} bg-melon-base antialiased`}>
         {children}
       </body>
     </html>

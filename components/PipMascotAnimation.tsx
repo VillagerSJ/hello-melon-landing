@@ -2,6 +2,9 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { useDocumentVisibility } from "@/components/home/hooks/useDocumentVisibility";
+import { useElementInViewport } from "@/components/home/hooks/useElementInViewport";
+import { useMediaQuery } from "@/components/home/hooks/useMediaQuery";
 
 const FRAME_SOURCES = [
   "/assets/mascot-pip-frame1.png",
@@ -18,10 +21,10 @@ const FRAME_SOURCES = [
   "/assets/mascot-pip-frame4.png",
   "/assets/mascot-pip-frame3.png",
   "/assets/mascot-pip-frame2.png"
-];
+] as const;
 const UNIQUE_FRAME_SOURCES = [...new Set(FRAME_SOURCES)];
-const TOTAL_FRAME_COUNT = UNIQUE_FRAME_SOURCES.length;
 const PRELOAD_TIMEOUT_MS = 1200;
+const VIEWPORT_THRESHOLD = 0.15;
 
 type PipMascotAnimationProps = {
   alt?: string;
@@ -34,71 +37,58 @@ export default function PipMascotAnimation({
   alt = "Pip mascot",
   className = "",
   frameDurationMs = 100,
-  respectReducedMotion = false
+  respectReducedMotion = true
 }: PipMascotAnimationProps) {
+  const mascotRef = useRef<HTMLSpanElement | null>(null);
   const [frameIndex, setFrameIndex] = useState(0);
-  const [reducedMotionEnabled, setReducedMotionEnabled] = useState(false);
   const [isPreloaded, setIsPreloaded] = useState(false);
-  const hasStartedPreloadRef = useRef(false);
+
+  const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
+  const isPageVisible = useDocumentVisibility();
+  const isInViewport = useElementInViewport(mascotRef, {
+    initialValue: false,
+    threshold: VIEWPORT_THRESHOLD
+  });
 
   useEffect(() => {
-    if (!respectReducedMotion) {
-      return;
-    }
-
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const updateMotionPreference = () => {
-      setReducedMotionEnabled(mediaQuery.matches);
-    };
-
-    updateMotionPreference();
-    mediaQuery.addEventListener("change", updateMotionPreference);
-
-    return () => {
-      mediaQuery.removeEventListener("change", updateMotionPreference);
-    };
-  }, [respectReducedMotion]);
-
-  useEffect(() => {
-    if (hasStartedPreloadRef.current) {
-      return;
-    }
-
-    hasStartedPreloadRef.current = true;
-
     let cancelled = false;
-    const loadedInThisRun = new Set<string>();
+    const loadedSources = new Set<string>();
 
-    const markFrameReady = (frameSrc: string) => {
-      if (cancelled || loadedInThisRun.has(frameSrc)) {
+    const markLoaded = (source: string) => {
+      if (cancelled || loadedSources.has(source)) {
         return;
       }
-      loadedInThisRun.add(frameSrc);
-      if (loadedInThisRun.size >= TOTAL_FRAME_COUNT) {
+
+      loadedSources.add(source);
+      if (loadedSources.size >= UNIQUE_FRAME_SOURCES.length) {
         setIsPreloaded(true);
       }
     };
 
-    const preloadTimeoutId = window.setTimeout(() => {
+    const timeoutId = window.setTimeout(() => {
       if (!cancelled) {
         setIsPreloaded(true);
       }
     }, PRELOAD_TIMEOUT_MS);
 
-    UNIQUE_FRAME_SOURCES.forEach((frameSrc) => {
+    for (const source of UNIQUE_FRAME_SOURCES) {
       const image = new window.Image();
-      image.onload = () => markFrameReady(frameSrc);
-      image.onerror = () => markFrameReady(frameSrc);
-      image.src = frameSrc;
-    });
+      image.onload = () => markLoaded(source);
+      image.onerror = () => markLoaded(source);
+      image.src = source;
+    }
 
     return () => {
       cancelled = true;
-      window.clearTimeout(preloadTimeoutId);
+      window.clearTimeout(timeoutId);
     };
   }, []);
 
-  const shouldAnimate = isPreloaded && !(respectReducedMotion && reducedMotionEnabled);
+  const shouldAnimate =
+    isPreloaded &&
+    isInViewport &&
+    isPageVisible &&
+    !(respectReducedMotion && prefersReducedMotion);
 
   useEffect(() => {
     if (!shouldAnimate) {
@@ -106,7 +96,7 @@ export default function PipMascotAnimation({
     }
 
     const intervalId = window.setInterval(() => {
-      setFrameIndex((prev) => (prev + 1) % FRAME_SOURCES.length);
+      setFrameIndex((previousFrame) => (previousFrame + 1) % FRAME_SOURCES.length);
     }, frameDurationMs);
 
     return () => {
@@ -114,17 +104,21 @@ export default function PipMascotAnimation({
     };
   }, [frameDurationMs, shouldAnimate]);
 
-  const src = shouldAnimate ? FRAME_SOURCES[frameIndex] : "/assets/mascot-pip.png";
+  const source = shouldAnimate
+    ? (FRAME_SOURCES[frameIndex] ?? FRAME_SOURCES[0])
+    : "/assets/mascot-pip.png";
 
   return (
-    <Image
-      src={src}
-      alt={alt}
-      width={650}
-      height={667}
-      priority
-      unoptimized
-      className={className}
-    />
+    <span ref={mascotRef} className={`block ${className}`.trim()}>
+      <Image
+        src={source}
+        alt={alt}
+        width={650}
+        height={667}
+        unoptimized
+        loading="lazy"
+        className="h-auto w-full"
+      />
+    </span>
   );
 }
