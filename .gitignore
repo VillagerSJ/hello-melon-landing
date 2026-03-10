@@ -24,6 +24,9 @@ pnpm-debug.log*
 # vercel
 .vercel
 
+# editor
+.vscode/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
