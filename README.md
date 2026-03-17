@@ -2,6 +2,28 @@
 
 Next.js App Router landing page built with React 19, TypeScript, and Tailwind CSS 4.
 
+## Runtime
+
+This project is pinned to:
+
+- Node.js `25.8.1`
+- npm `11.11.1`
+
+Project-only setup options:
+
+If you already use Volta, entering this repo will use the pinned versions from `package.json`.
+
+```bash
+# If you use nvm/fnm, this repo exposes .nvmrc for Node
+nvm use
+
+# Exact npm version for this repo only
+npx npm@11.11.1 install
+npx npm@11.11.1 run dev
+```
+
+`package.json` declares exact `engines`, `packageManager`, and `volta` pins, and `.npmrc` enables `engine-strict`, so npm will reject the wrong Node/npm version inside this repository.
+
 ## Scripts
 
 ```bash

@@ -53,7 +53,7 @@ export default function VillageStorySection() {
                 src="/assets/HelloMelon_Illustration_avatar.png"
                 alt="Sanjé avatar illustration"
                 width={381}
-                height={547}
+                height={547}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
                 sizes="(max-width: 1024px) min(72vw, 320px), 315px"
                 className="mx-auto h-auto w-[min(100%,315px)]"
               />
