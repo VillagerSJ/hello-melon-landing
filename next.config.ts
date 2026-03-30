@@ -17,10 +17,6 @@ const nextConfig: NextConfig = {
     removeConsole: isProd ? { exclude: ["error"] } : false,
   },
 
-  eslint: {
-    ignoreDuringBuilds: false,
-  },
-
   typescript: {
     ignoreBuildErrors: false,
   },

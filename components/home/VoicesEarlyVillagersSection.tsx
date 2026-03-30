@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef } from "react";
 import { HOME_COPY, VOICES_CARDS } from "./content";
 import { useDocumentVisibility } from "./hooks/useDocumentVisibility";
@@ -59,24 +60,17 @@ export default function VoicesEarlyVillagersSection() {
 
   return (
     <section className="relative bg-melon-ribbon px-[clamp(12px,4vw,24px)] pb-[88px] pt-[48px] md:px-12 md:pb-[clamp(54px,8vw,88px)] md:pt-[clamp(60px,9vw,96px)] lg:px-[110px]">
-      <div className="pointer-events-none absolute inset-x-0 top-0 -translate-y-[96%] text-melon-ribbon">
-        <svg
-          viewBox="0 0 1440 120"
-          preserveAspectRatio="none"
-          className="h-[clamp(28px,5vw,56px)] w-full"
-        >
-          <path
-            d="M0 88C80 40 160 40 240 88C320 136 400 136 480 88C560 40 640 40 720 88C800 136 880 136 960 88C1040 40 1120 40 1200 88C1280 136 1360 136 1440 88V120H0V88Z"
-            fill="currentColor"
+      <div className="pointer-events-none absolute inset-x-0 top-0 -translate-y-[96%]">
+        <div className="relative h-[clamp(40px,6vw,72px)] w-full">
+          <Image
+            src="/assets/voices-of-early-villagers-upper-wave.svg"
+            alt=""
+            aria-hidden
+            fill
+            sizes="100vw"
+            className="object-fill"
           />
-          <path
-            d="M0 88C80 40 160 40 240 88C320 136 400 136 480 88C560 40 640 40 720 88C800 136 880 136 960 88C1040 40 1120 40 1200 88C1280 136 1360 136 1440 88"
-            fill="none"
-            stroke="#F9EED9"
-            strokeWidth="3"
-            vectorEffect="non-scaling-stroke"
-          />
-        </svg>
+        </div>
       </div>
 
       <div className="mx-auto w-full max-w-[1760px]">

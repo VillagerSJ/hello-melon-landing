@@ -4,24 +4,17 @@ import { HOME_COPY } from "./content";
 export default function VillageStorySection() {
   return (
     <section className="relative bg-melon-rose-soft px-[clamp(12px,4vw,24px)] pb-[clamp(92px,13vw,150px)] pt-[clamp(58px,8.5vw,112px)] md:px-12 lg:px-[110px]">
-      <div className="pointer-events-none absolute inset-x-0 top-0 z-20 -translate-y-[96%] text-melon-rose-soft">
-        <svg
-          viewBox="0 0 1440 120"
-          preserveAspectRatio="none"
-          className="h-[clamp(28px,5vw,56px)] w-full"
-        >
-          <path
-            d="M0 88C80 40 160 40 240 88C320 136 400 136 480 88C560 40 640 40 720 88C800 136 880 136 960 88C1040 40 1120 40 1200 88C1280 136 1360 136 1440 88V120H0V88Z"
-            fill="currentColor"
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-20 -translate-y-[96%]">
+        <div className="relative h-[clamp(28px,5vw,56px)] w-full">
+          <Image
+            src="/assets/villager-story-upper-wave.svg"
+            alt=""
+            aria-hidden
+            fill
+            sizes="100vw"
+            className="object-fill"
           />
-          <path
-            d="M0 88C80 40 160 40 240 88C320 136 400 136 480 88C560 40 640 40 720 88C800 136 880 136 960 88C1040 40 1120 40 1200 88C1280 136 1360 136 1440 88"
-            fill="none"
-            stroke="#FAD4CB"
-            strokeWidth="3"
-            vectorEffect="non-scaling-stroke"
-          />
-        </svg>
+        </div>
       </div>
 
       <div className="mx-auto w-full max-w-[1760px]">

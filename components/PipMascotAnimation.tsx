@@ -14,13 +14,11 @@ const FRAME_SOURCES = [
   "/assets/mascot-pip-frame5.png",
   "/assets/mascot-pip-frame6.png",
   "/assets/mascot-pip-frame7.png",
-  "/assets/mascot-pip-frame8.png",
-  "/assets/mascot-pip-frame7.png",
   "/assets/mascot-pip-frame6.png",
   "/assets/mascot-pip-frame5.png",
   "/assets/mascot-pip-frame4.png",
   "/assets/mascot-pip-frame3.png",
-  "/assets/mascot-pip-frame2.png"
+  "/assets/mascot-pip-frame2.png",
 ] as const;
 const UNIQUE_FRAME_SOURCES = [...new Set(FRAME_SOURCES)];
 const PRELOAD_TIMEOUT_MS = 1200;
@@ -37,7 +35,7 @@ export default function PipMascotAnimation({
   alt = "Pip mascot",
   className = "",
   frameDurationMs = 100,
-  respectReducedMotion = true
+  respectReducedMotion = true,
 }: PipMascotAnimationProps) {
   const mascotRef = useRef<HTMLSpanElement | null>(null);
   const [frameIndex, setFrameIndex] = useState(0);
@@ -47,7 +45,7 @@ export default function PipMascotAnimation({
   const isPageVisible = useDocumentVisibility();
   const isInViewport = useElementInViewport(mascotRef, {
     initialValue: false,
-    threshold: VIEWPORT_THRESHOLD
+    threshold: VIEWPORT_THRESHOLD,
   });
 
   useEffect(() => {
